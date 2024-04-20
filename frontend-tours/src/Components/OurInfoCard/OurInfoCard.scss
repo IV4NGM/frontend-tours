@@ -34,6 +34,11 @@
     min-width: 430px;
     display: flex;
   }
+  &-about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .our-info-logo {

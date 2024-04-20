@@ -6,8 +6,12 @@ import logo from '@/assets/logo.png'
 import { MdCake } from 'react-icons/md'
 import { GiCommercialAirplane } from 'react-icons/gi'
 import { VscVerified } from 'react-icons/vsc'
+import { FaArrowRight } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 
 const OurInfoCard = () => {
+  const navigate = useNavigate()
+
   return (
     <>
       <div className='our-info-card'>
@@ -43,22 +47,26 @@ const OurInfoCard = () => {
           <img src={logo} alt='Explorers Tours Logo' className='our-info-logo' />
           <h3>Explorers Tours</h3>
         </div>
-        <p className='our-info-animation-container'>
-          <TypeAnimation
-            preRenderFirstString
-            sequence={[
-              'Viaja con tranquilidad',
-              1500,
-              'Viaja con comodidad',
-              1500,
-              'Viaja con Explorers Tours',
-              2500
-            ]}
-            speed={50}
-            style={{ fontSize: '2em' }}
-            repeat={Infinity}
-          />
-        </p>
+        <div className='our-info-about-container'>
+          <p className='our-info-animation-container'>
+            <TypeAnimation
+              preRenderFirstString
+              sequence={[
+                'Viaja con tranquilidad',
+                1500,
+                'Viaja con comodidad',
+                1500,
+                'Viaja con Explorers Tours',
+                2000
+              ]}
+              speed={50}
+              style={{ fontSize: '2em' }}
+              repeat={Infinity}
+            />
+          </p>
+          <button className='btn btn-outline-primary space-up' onClick={() => navigate('/about-us')}>Sobre nosotros <FaArrowRight /></button>
+        </div>
+
       </div>
     </>
 

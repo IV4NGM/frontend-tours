@@ -1,0 +1,21 @@
+
+$red-promos: #ec1b24;
+
+.rectangle-tag-container {
+  position: relative;
+  background-color: $red-promos;
+  min-height: 20px;
+  width: fit-content;
+  padding: 2px 5px;
+  display: flex;
+  justify-content: center;
+  & p {
+    color: white;
+    margin: 0;
+  }
+}
+
+.rectangle-tag {
+  width: 60px;
+  height: 60px;
+}
