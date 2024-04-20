@@ -1,0 +1,22 @@
+$success: #0269b7;
+
+.scroll-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $success;
+  color: white;
+
+  &:hover {
+    border-color: $success;
+    transform: scale(1.05);
+    transition: 2ms ease-in-out;
+  }
+}
