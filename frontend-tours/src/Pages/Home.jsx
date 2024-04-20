@@ -1,29 +1,15 @@
-import { TypeAnimation } from 'react-type-animation'
-import CountUp from 'react-countup'
 import ImagesCarousel from '@/Components/Carousel/ImagesCarousel'
+import OurInfoCard from '@/Components/OurInfoCard/OurInfoCard'
+import '@/Styles/Home.scss'
 
 const Home = () => {
   return (
     <div className='page-container'>
-      {/* <h1>Aventura infinita</h1> */}
+      <h2>¡Descubre nuestros destinos más famosos!</h2>
       <ImagesCarousel />
-
-      <h2>Encuentra viajes con los mejores precios</h2>
-      <p>+<CountUp start={0} end={50} duration={3} /> destinos</p>
-      <TypeAnimation
-        preRenderFirstString
-        sequence={[
-          'Viaja cómodo',
-          1000,
-          'Viaja tranquilo',
-          1000,
-          'Viaja feliz',
-          1000
-        ]}
-        speed={50}
-        style={{ fontSize: '2em' }}
-        repeat={Infinity}
-      />
+      <h2 className='space-up-lg'>Planea tu siguiente aventura con los mejores precios</h2>
+      <OurInfoCard />
+      <h2 className='space-up-lg'>Consulta nuestros tours</h2>
     </div>
   )
 }

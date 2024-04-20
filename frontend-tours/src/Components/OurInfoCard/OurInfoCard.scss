@@ -1,0 +1,47 @@
+.our-info {
+  &-card {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 2px 2px 7px gray;
+    border-radius: 5px;
+    padding: 25px;
+    align-items: center;
+    & p {
+      margin-bottom: 0;
+      font-size: 18px;
+    }
+    margin-top: 40px;
+  }
+  &-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    p {
+      max-width: 150px;
+      justify-content: center;
+    }
+    &-number {
+      font-size: 26px !important;
+      margin-right: 5px;
+      width: 55px;
+    }
+    &-plus {
+      font-size: 26px !important;
+    }
+  }
+  &-animation-container {
+    min-width: 430px;
+    display: flex;
+  }
+}
+
+.our-info-logo {
+  height: 200px;
+  width: 200px;
+  &-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

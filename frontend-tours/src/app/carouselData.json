@@ -1,0 +1,49 @@
+{
+  "images": [
+    {
+      "src": "./Carousel-LosCabos.webp",
+      "name": "Los Cabos",
+      "objectPosition": "center center"
+    },
+    {
+      "src": "./Carousel-RivieraMaya.jpg",
+      "name": "Riviera Maya",
+      "objectPosition": "center top"
+    },
+    {
+      "src": "./Carousel-Huatulco.webp",
+      "name": "Huatulco",
+      "objectPosition": "center top"
+    },
+    {
+      "src": "./Carousel-SanMiguelDeAllende.jpg",
+      "name": "San Miguel de Allende",
+      "objectPosition": "center center"
+    },
+    {
+      "src": "./Carousel-PlayaDelCarmen.jpg",
+      "name": "Playa del Carmen",
+      "objectPosition": "center center"
+    },
+    {
+      "src": "./Carousel-Guadalajara.webp",
+      "name": "Guadalajara",
+      "objectPosition": "center center"
+    },
+    {
+      "src": "./Carousel-Tulum.jpg",
+      "name": "Tulum",
+      "objectPosition": "center center"
+    },
+    {
+      "src": "./Carousel-CanonSumidero.jpg",
+      "name": "Chiapas",
+      "objectPosition": "center center"
+    },
+    {
+      "src": "./Carousel-Monarca.jpg",
+      "name": "Tour Mariposas Monarca",
+      "objectPosition": "center 30%"
+    }
+  ]
+}

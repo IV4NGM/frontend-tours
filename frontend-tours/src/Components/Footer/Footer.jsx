@@ -7,7 +7,7 @@ const Footer = () => {
     <div className='footer-container'>
       <nav className='navbar bottom footer navbar-white'>
         <div className='container-fluid footer-body center-content-on-small'>
-          <p className='bold-text'>Aventura Infinita 2024</p>
+          <p className='bold-text'>Explorers Tours</p>
           <p className='hide-on-small'>Designed by Iván G M</p>
           <div className='mail-footer hide-on-small'>
             <EmailOutlinedIcon />

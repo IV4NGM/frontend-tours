@@ -2,13 +2,6 @@ import './Navbar.scss'
 import logo from '@/assets/logo.png'
 import Search from '@mui/icons-material/Search'
 import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined'
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
-import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined'
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
-import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined'
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
-import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 
 import { NavLink, useNavigate } from 'react-router-dom'
 // import useAuthContext from '@/Context/AuthContext/useAuthContext'
@@ -41,8 +34,8 @@ const Navbar = () => {
           <span className='navbar-toggler-icon' />
         </button>
         <NavLink className='navbar-brand navbar-brand-logo' to='/' onClick={() => setNavSearch('')}>
-          <img src={logo} alt='Aventura Infinita' className='d-inline-block align-text-top logo-nav' />
-          <p>Aventura Infinita</p>
+          <img src={logo} alt='Explorers Tours' className='d-inline-block align-text-top logo-nav' />
+          <p>Explorers Tours</p>
         </NavLink>
         <div className='navbar__input-group input-group'>
           <input
