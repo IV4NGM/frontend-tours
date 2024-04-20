@@ -7,7 +7,7 @@ const PageNotFound = () => {
     <div className='page-container'>
       <h2 className='space-up space-down'>No hemos encontrado la página que buscas</h2>
       <SearchOutlinedIcon className='not-found-image' />
-      <h3 className='space-down-lg'>Vuelve al inicio para encontrar tus viajes favoritos</h3>
+      <h3 className='space-down-lg'>Vuelve al inicio para encontrar tu próxima aventura</h3>
       <button className='btn btn-success btn-lg spaced' onClick={() => navigate('/')}>Ir a Inicio</button>
     </div>
   )

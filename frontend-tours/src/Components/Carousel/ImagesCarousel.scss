@@ -1,0 +1,44 @@
+.carousel-top{
+  margin-top: 40px;
+  width: 95vw;
+  align-self: center;
+}
+
+.carousel-item:hover {
+  cursor: pointer;
+}
+
+.carousel-item-container {
+  width: 100%;
+  position: relative;
+}
+
+// .carousel-movie-title {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   margin: 0;
+//   font-size: calc(1.325rem + .9vw);
+//   transform: translate(-50%, -50%);
+//   font-weight: 500;
+// }
+
+.carousel-item-img{
+  height: 75vh; 
+  filter: brightness(75%);
+  object-fit: cover;
+  width: 100%;
+  border-radius: 15px;
+}
+
+.carousel-image-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  font-size: 3rem;
+  transform: translate(-50%, -50%);
+  font-weight: 500;
+  color: white;
+  text-shadow: 2px 2px 2px black;
+}

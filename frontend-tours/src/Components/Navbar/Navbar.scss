@@ -18,6 +18,8 @@ $green-success-lighter: rgba(61, 164, 116, 0.650);
     p {
       margin-bottom: 0;
     }
+    display: flex;
+    align-items: center;
   }
 
   &-brand__logout {
@@ -31,6 +33,7 @@ $green-success-lighter: rgba(61, 164, 116, 0.650);
 
   &__input-group-text {
     border-radius: 0px 5px 5px 0px !important;
+    cursor: pointer;
   }
 
   &__nav-search {
@@ -182,13 +185,14 @@ $green-success-lighter: rgba(61, 164, 116, 0.650);
 
 
 .logo-nav{
-  width: 40px;
-  height: 40px;
+  width: 70px;
+  height: 70px;
   margin: 0px 20px;
   // background-color: #6a040f;
   // background-color: $green-success;
   padding: 5px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 
@@ -205,4 +209,11 @@ $green-success-lighter: rgba(61, 164, 116, 0.650);
   top: -8px;
   right: -7px;
   color: black;
+}
+
+.navbar {
+  &-white {
+    --bs-bg-opacity: 1;
+    background-color: white;
+  }
 }

@@ -1,5 +1,5 @@
 import './Navbar.scss'
-import eagleLogo from '@/assets/eagle-icon.png'
+import logo from '@/assets/logo.png'
 import Search from '@mui/icons-material/Search'
 import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
@@ -41,8 +41,8 @@ const Navbar = () => {
           <span className='navbar-toggler-icon' />
         </button>
         <NavLink className='navbar-brand navbar-brand-logo' to='/' onClick={() => setNavSearch('')}>
-          <img src={eagleLogo} alt='Eagle blade logo' className='d-inline-block align-text-top logo-nav' />
-          <p>Explora Tours</p>
+          <img src={logo} alt='Aventura Infinita' className='d-inline-block align-text-top logo-nav' />
+          <p>Aventura Infinita</p>
         </NavLink>
         <div className='navbar__input-group input-group'>
           <input
@@ -56,7 +56,7 @@ const Navbar = () => {
                 navigate('/search')
               }
             }}
-            placeholder='Busca en todo Eagle Market'
+            placeholder='¡Encuentra tu próxima aventura!'
             className='navbar__nav-search form-control nav-search-hide'
           />
           <div
