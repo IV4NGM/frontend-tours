@@ -3,13 +3,15 @@ import Home from '@/Pages/Home'
 import Login from '@/Pages/Login'
 import TourInfo from '@/Pages/TourInfo'
 import PageNotFound from '@/Pages/PageNotFound'
+import About from '@/Pages/About'
 
 const RouterIndex = () => {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='/login' element={<Login />} />
+      <Route path='/about-us' element={<About />} />
       <Route path='/tour/:id' element={<TourInfo />} />
+      <Route path='/login' element={<Login />} />
       <Route path='/*' element={<PageNotFound />} />
     </Routes>
   )
