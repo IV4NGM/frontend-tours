@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from '../Features/Auth/authSlice'
 import movieReducer from '../Features/Movies/movieSlice'
+import tourReducer from '../Features/Tours/tourSlice'
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    movie: movieReducer
+    movie: movieReducer,
+    tour: tourReducer
   }
 })

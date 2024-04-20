@@ -1,0 +1,13 @@
+.tour-card {
+  margin: 20px;
+  border: 1px solid gray;
+  border-radius: 15px;
+  padding: 20px;
+  cursor: pointer;
+  & .main-image {
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+}
