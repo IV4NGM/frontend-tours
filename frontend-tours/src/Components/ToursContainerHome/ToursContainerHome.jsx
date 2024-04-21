@@ -4,9 +4,11 @@ import './ToursContainerHome.scss'
 
 const ToursContainerHome = () => {
   const { tours } = useSelector((state) => state.tour)
+  const sortedTours = [...tours]
+  sortedTours.sort((tourA, tourB) => tourA.template_info.duration - tourB.template_info.duration)
   return (
     <div className='tours-container'>
-      {tours && tours.map((tour, index) => {
+      {sortedTours && sortedTours.map((tour, index) => {
         return <TourCard tourData={tour} key={`tour-card-${index}`} />
       })}
     </div>

@@ -2,13 +2,15 @@
 $red-promos: #ec1b24;
 
 .rectangle-tag-container {
-  position: relative;
+  position: absolute;
+  bottom: 0;
   background-color: $red-promos;
   min-height: 20px;
-  width: fit-content;
+  width: 100%;
   padding: 2px 5px;
   display: flex;
   justify-content: center;
+  border-radius: 0px 0px 15px 15px;
   & p {
     color: white;
     margin: 0;

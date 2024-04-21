@@ -4,6 +4,10 @@
   padding: 20px;
   box-shadow: 0px 0px 5px gray;
   cursor: pointer;
+  position: relative;
+  &-image-container {
+    position: relative;
+  }
   & .main-image {
     width: 320px;
     height: 320px;

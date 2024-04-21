@@ -1,0 +1,12 @@
+.date-tag-container {
+  position: absolute;
+  top: 0;
+  & p {
+    margin: 0;
+  }
+  background-color: green;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 15px 0px 15px 0px;
+  box-shadow: 2px 2px 2px black;
+}
