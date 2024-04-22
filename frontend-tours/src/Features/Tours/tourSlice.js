@@ -9,7 +9,8 @@ const initialState = {
   successType: '',
   isError: false,
   errorType: '',
-  message: ''
+  message: '',
+  navSearch: ''
 }
 
 export const getAllTours = createAsyncThunk('tours/get-all', async (toursFilter, thunkAPI) => {
@@ -34,6 +35,12 @@ export const tourSlice = createSlice({
       state.isLoading = false
       state.loadingType = ''
       state.message = ''
+    },
+    resetNavSearch: (state) => {
+      state.navSearch = ''
+    },
+    setNavSearch: (state, action) => {
+      state.navSearch = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -55,5 +62,5 @@ export const tourSlice = createSlice({
   }
 })
 
-export const { reset, resetApiState } = tourSlice.actions
+export const { reset, resetApiState, resetNavSearch, setNavSearch } = tourSlice.actions
 export default tourSlice.reducer
