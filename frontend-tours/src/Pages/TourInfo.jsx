@@ -1,9 +1,8 @@
 import { toast } from 'react-toastify'
-import { FaPlus, FaRegCalendarAlt, FaCheck, FaCity, FaMapMarked, FaBusAlt } from 'react-icons/fa'
+import { FaRegCalendarAlt, FaCheck, FaCity, FaMapMarked, FaBusAlt } from 'react-icons/fa'
 import { IoLocationOutline } from 'react-icons/io5'
 import { RiRunFill } from 'react-icons/ri'
 import { BiWorld } from 'react-icons/bi'
-import { FaWhatsapp } from 'react-icons/fa6'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllTours, resetApiState } from '@/Features/Tours/tourSlice'
@@ -15,6 +14,7 @@ import TourInfoImagesCarousel from '@/Components/TourInfoImagesCarousel/TourInfo
 
 import '@/Styles/TourInfo.scss'
 import TourDateDetails from '@/Components/TourDateDetails/TourDateDetails'
+import WhatsAppButton from '@/Components/WhatsAppButton/WhatsAppButton'
 
 const TourInfo = () => {
   const { id } = useParams()
@@ -40,7 +40,7 @@ const TourInfo = () => {
       toast.error(message)
     }
     if (errorType !== 'AUTH') {
-      // dispatch(resetApiState())
+      dispatch(resetApiState())
     }
   }, [isError, isSuccess, message, errorType])
 
@@ -115,7 +115,7 @@ const TourInfo = () => {
           <TourDateDetails tour={tour} tourData={tourData} key={`tour-date-${index}`} />
         ))}
       </div>
-      {allTours.length > 0 && <button className='btn-contact-us'><FaWhatsapp /> ¡Reservar ahora!</button>}
+      {allTours.length > 0 && <WhatsAppButton text='¡Reservar ahora!' />}
     </div>
   )
 }

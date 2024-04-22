@@ -9,6 +9,7 @@ import { getAllTours, resetApiState } from '@/Features/Tours/tourSlice'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import useGetCurrentFormattedDate from '@/Hooks/useGetCurrentFormattedDate'
+import WhatsAppButton from '@/Components/WhatsAppButton/WhatsAppButton'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -47,6 +48,7 @@ const Home = () => {
       <OurInfoCard />
       <h2 className='space-up-lg space-down-lg'>¿Planeando tus vacaciones para alguna fecha?</h2>
       <h4>Prueba nuestra <Link to='/search' className='link'>búsqueda avanzada</Link>, o bien, ¡contáctanos!</h4>
+      <WhatsAppButton text='Enviar mensaje' />
       <h2 className='space-up-lg space-down-lg'>Consulta nuestro catálogo</h2>
       <ToursContainerHome />
     </div>

@@ -1,5 +1,5 @@
-import { FaWhatsapp } from 'react-icons/fa6'
 import '@/Styles/About.scss'
+import WhatsAppButton from '@/Components/WhatsAppButton/WhatsAppButton'
 
 const About = () => {
   return (
@@ -11,7 +11,7 @@ const About = () => {
         <p>Ofrecemos servicios de tours grupales y personalizados.</p>
       </div>
       <h3>¡Agenda una cita con nosotros o contáctanos!</h3>
-      <button className='btn-contact-us'><FaWhatsapp /> Enviar mensaje</button>
+      <WhatsAppButton text='Enviar mensaje' />
     </div>
   )
 }
