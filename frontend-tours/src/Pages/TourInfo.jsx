@@ -115,7 +115,7 @@ const TourInfo = () => {
           <TourDateDetails tour={tour} tourData={tourData} key={`tour-date-${index}`} />
         ))}
       </div>
-      {allTours.length > 0 && <button className='btn-reserve-now'><FaWhatsapp /> ¡Reservar ahora!</button>}
+      {allTours.length > 0 && <button className='btn-contact-us'><FaWhatsapp /> ¡Reservar ahora!</button>}
     </div>
   )
 }
