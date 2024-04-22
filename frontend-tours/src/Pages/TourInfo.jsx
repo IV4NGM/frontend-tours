@@ -73,7 +73,7 @@ const TourInfo = () => {
   images.push(tourData?.template_info?.main_image)
   images = images.concat(tourData?.template_info?.secondary_images)
 
-  let allTours = tourData.tours.filter(tour => tour?.status?.status_code === 'Active')
+  let allTours = tourData.tours.filter(tour => tour?.status?.status_code === 'Active' && tour?.total_seats - tour?.reserved_seats_amount > 0)
   if (allTours.length > 0) {
     allTours = allTours.sort((tourA, tourB) => new Date(tourA?.starting_date) - new Date(tourB?.starting_date))
   }

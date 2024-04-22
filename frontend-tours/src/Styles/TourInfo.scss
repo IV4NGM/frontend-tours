@@ -1,7 +1,7 @@
 .tour-description {
   margin-top: 40px;
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: 250px auto;
   column-gap: 30px;
   justify-items: start;
   & p {

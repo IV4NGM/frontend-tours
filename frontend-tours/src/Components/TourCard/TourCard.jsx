@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import './TourCard.scss'
+import airplane from '@/assets/airplane.jpg'
 import { FaPlus, FaRegCalendarAlt } from 'react-icons/fa'
 import { IoLocationOutline } from 'react-icons/io5'
 
@@ -64,7 +65,12 @@ const TourCard = ({ tourData }) => {
       {promoToShow && <DiscountTag data={promoToShow} />}
       <div className='tour-card-image-container'>
         {nextDate && <DateTag date={nextDate} duration={tourData?.template_info?.duration} />}
-        <img src={tourData?.template_info?.main_image} alt={tourData?.template_info?.name} className='main-image' />
+        <img
+          src={tourData?.template_info?.main_image || airplane} alt={tourData?.template_info?.name} className='main-image' onError={({ currentTarget }) => {
+            currentTarget.onerror = null
+            currentTarget.src = airplane
+          }}
+        />
         {(availability <= 10) && <RectangleTag data={textAvailability} />}
       </div>
       <p className='tour-card-title'>{tourData?.template_info?.name}</p>
