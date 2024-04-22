@@ -7,10 +7,12 @@ import { getAllTours, resetApiState } from '@/Features/Tours/tourSlice'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '@/Components/Spinner/Spinner'
+import useGetCurrentFormattedDate from '@/Hooks/useGetCurrentFormattedDate'
+import TourInfoImagesCarousel from '@/Components/TourInfoImagesCarousel/TourInfoImagesCarousel'
 
 const TourInfo = () => {
   const { id } = useParams()
-
+  const currentDate = useGetCurrentFormattedDate()
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -19,7 +21,7 @@ const TourInfo = () => {
   const errorTypesAllowed = ['GET_TOURS']
 
   useEffect(() => {
-    dispatch(getAllTours())
+    dispatch(getAllTours({ current_date: currentDate }))
 
     // return () => {
     //   dispatch(resetApiState())
@@ -60,10 +62,15 @@ const TourInfo = () => {
       </div>
     )
   }
+
+  let images = []
+  images.push(tourData?.template_info?.main_image)
+  images = images.concat(tourData?.template_info?.secondary_images)
   return (
     <div className='page-container'>
-      <img src={tourData?.template_info?.main_image} alt={tourData?.template_info?.name} className='main-image' />
       <p className='bold-text'>{tourData?.template_info?.name}</p>
+      {/* <img src={tourData?.template_info?.main_image} alt={tourData?.template_info?.name} className='main-image' /> */}
+      <TourInfoImagesCarousel images={images} name={tourData?.template_info?.name} />
       <p><FaRegCalendarAlt /> {tourData?.template_info?.duration} {tourData?.template_info?.duration === 1 ? 'día' : 'días'}</p>
       <p><IoLocationOutline /> {tourData?.template_info?.states.join(', ')} </p>
     </div>

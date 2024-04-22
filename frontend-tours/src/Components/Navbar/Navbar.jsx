@@ -35,7 +35,7 @@ const Navbar = () => {
         </button>
         <NavLink className='navbar-brand navbar-brand-logo' to='/' onClick={() => setNavSearch('')}>
           <img src={logo} alt='Explorers Tours' className='d-inline-block align-text-top logo-nav' />
-          <p>Explorers Tours</p>
+          <p className='navbar-agency-name'>Explorers Tours</p>
         </NavLink>
         <div className='navbar__input-group input-group'>
           <input
