@@ -68,7 +68,7 @@ const TourInfo = () => {
   images = images.concat(tourData?.template_info?.secondary_images)
   return (
     <div className='page-container'>
-      <p className='bold-text'>{tourData?.template_info?.name}</p>
+      <h2 className='bold-text space-down'>{tourData?.template_info?.name}</h2>
       {/* <img src={tourData?.template_info?.main_image} alt={tourData?.template_info?.name} className='main-image' /> */}
       <TourInfoImagesCarousel images={images} name={tourData?.template_info?.name} />
       <p><FaRegCalendarAlt /> {tourData?.template_info?.duration} {tourData?.template_info?.duration === 1 ? 'día' : 'días'}</p>

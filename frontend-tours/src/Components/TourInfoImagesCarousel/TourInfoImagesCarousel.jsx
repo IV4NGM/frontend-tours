@@ -1,21 +1,26 @@
-import { PhotoProvider, PhotoView } from 'react-photo-view'
-import 'react-photo-view/dist/react-photo-view.css'
+import React, { useRef } from 'react'
+import ImageGallery from 'react-image-gallery'
+import 'react-image-gallery/styles/css/image-gallery.css'
 import './TourInfoImage.scss'
 
-const TourInfoImagesCarousel = ({ images, name }) => {
-  return (
-    <PhotoProvider>
-      <div className='photos-container'>
-        {images.map((image, index) => {
-          return (
-            <PhotoView src={image} key={`photo-view-${name}-${index}`}>
-              <img src={image} alt={name} className='photo-to-view' />
-            </PhotoView>
-          )
-        })}
-      </div>
+const TourInfoImagesCarousel = ({ images }) => {
+  const imageGalleryRef = useRef(null)
 
-    </PhotoProvider>
+  const toggleFullScreen = () => {
+    imageGalleryRef.current.toggleFullScreen()
+  }
+
+  return (
+    <div>
+      <ImageGallery
+        items={images.map(image => ({ original: image, thumbnail: image, originalAlt: `Slide ${images.indexOf(image) + 1}` }))}
+        showPlayButton={false}
+        ref={imageGalleryRef}
+        onClick={toggleFullScreen}
+        autoPlay
+      />
+    </div>
+
   )
 }
 
