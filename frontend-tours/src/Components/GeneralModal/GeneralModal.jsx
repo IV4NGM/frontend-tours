@@ -11,7 +11,7 @@ const GeneralModal = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const [showModal, setShowModal] = useState(true)
+  const [showModal, setShowModal] = useState(false)
   const { showTokenModal, tokenModalInfo } = useSelector((state) => state.auth)
   const onYes = tokenModalInfo?.onYes === 'LOGIN' ? '/login' : '/'
   const onNo = tokenModalInfo.onNo === 'LOGIN' ? '/login' : '/'
@@ -53,7 +53,7 @@ const GeneralModal = () => {
                 }}
               >{tokenModalInfo?.textNo}
               </button>
-              )
+            )
             : ''
         }
         <button
