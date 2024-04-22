@@ -1,0 +1,21 @@
+.info-tag-container {
+  position: relative;
+  display: inline-block;
+  width: 72px;
+  height: 72px;
+  filter: drop-shadow(2px 2px 2px gray);
+  & span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    margin: 0;
+    text-align: center;
+    text-wrap: wrap;
+  }
+  & img {
+    height: inherit;
+    width: inherit;
+  }
+}

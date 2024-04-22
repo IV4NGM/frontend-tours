@@ -38,12 +38,10 @@ const TourCard = ({ tourData }) => {
       let validPromos = tour.promos
       validPromos = validPromos.filter(promo => promo.isActive && promo.show && promo.usedCount < promo.amount)
       validPromos.forEach(promo => {
-        if (!promosArray.includes(promo.type)) {
-          promosArray.push({
-            type: promo.type,
-            value: promo.value
-          })
-        }
+        promosArray.push({
+          type: promo.type,
+          value: promo.value
+        })
       })
     })
     nextDate = tours[0].starting_date
