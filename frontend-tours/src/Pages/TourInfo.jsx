@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify'
-import { FaRegCalendarAlt, FaCheck, FaCity, FaMapMarked, FaBusAlt } from 'react-icons/fa'
+import { FaRegCalendarAlt, FaCheck, FaCity, FaMapMarked, FaBusAlt, FaCompass } from 'react-icons/fa'
 import { IoLocationOutline } from 'react-icons/io5'
 import { RiRunFill } from 'react-icons/ri'
 import { BiWorld } from 'react-icons/bi'
@@ -83,29 +83,29 @@ const TourInfo = () => {
       <h2 className='bold-text space-down'>{tourData?.template_info?.name}</h2>
       <TourInfoImagesCarousel images={images} name={tourData?.template_info?.name} />
       <div className='tour-description'>
-        <p className='property-name'>Tour</p>
+        <p className='property-name'><FaCompass /> Tour</p>
         <p><FaBusAlt /> {tourData?.template_info?.name}</p>
-        <p className='property-name'>Duración</p>
+        <p className='property-name'><FaCompass /> Duración</p>
         <p><FaRegCalendarAlt /> {tourData?.template_info?.duration} {tourData?.template_info?.duration === 1 ? 'día' : 'días'}</p>
-        <p className='property-name'>Nivel de ejercicio</p>
+        <p className='property-name'><FaCompass /> Nivel de ejercicio</p>
         <p><RiRunFill /> {tourData?.template_info?.exercise_level}</p>
-        <p className='property-name'>Recomendado</p>
+        <p className='property-name'><FaCompass /> Recomendado</p>
         <p><FaCheck /> {tourData?.template_info?.recommended_for}</p>
-        <p className='property-name'>Estados a visitar</p>
+        <p className='property-name'><FaCompass /> Estados a visitar</p>
         <p><IoLocationOutline /> {tourData?.template_info?.states.join(', ')} </p>
-        <p className='property-name'>Ciudades a visitar</p>
+        <p className='property-name'><FaCompass /> Ciudades a visitar</p>
         <p><FaCity /> {tourData?.template_info?.cities.join(', ')} </p>
         {tourData?.template_info?.countries.length > 1 &&
           <>
-            <p className='property-name'>Países</p>
+            <p className='property-name'><FaCompass /> Países</p>
             <p><FaMapMarked /> {tourData?.template_info?.countries.join(', ')} </p>
           </>}
         {tourData?.template_info?.continents.length > 1 &&
           <>
-            <p className='property-name'>Continentes</p>
+            <p className='property-name'><FaCompass /> Continentes</p>
             <p><BiWorld /> {tourData?.template_info?.continents.join(', ')} </p>
           </>}
-        <p className='property-name'>Descripción</p>
+        <p className='property-name'><FaCompass /> Descripción</p>
         <p className='display-linebreak'>{tourData?.template_info?.description} </p>
       </div>
       <h3 className='space-up-lg'>Próximas fechas</h3>

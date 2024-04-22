@@ -4,25 +4,17 @@ import Search from '@mui/icons-material/Search'
 import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined'
 
 import { NavLink, useNavigate } from 'react-router-dom'
-// import useAuthContext from '@/Context/AuthContext/useAuthContext'
-// import useProductsContext from '@/Context/ProductsContext/useProductsContext'
-// import useCartContext from '@/Context/CartContext/useCartContext'
 
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setNavSearch } from '@/Features/Tours/tourSlice'
 
 const Navbar = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  // const { loginStatus, userInfo } = useAuthContext()
-  // const { navSearch, setNavSearch, setAdvancedSearch } = useProductsContext()
-  const [navSearch, setNavSearch] = useState('')
-  // const { cart } = useCartContext()
-
-  // let productsAmount = 0
-  // for (const item of cart) {
-  //   productsAmount += item.product_amount
-  // }
+  const [search, setSearch] = useState('')
 
   const maxQueryMatches = useMediaQuery('(max-width:600px)')
   const minQueryMatches = useMediaQuery('(min-width:1200px)')
@@ -40,12 +32,12 @@ const Navbar = () => {
         <div className='navbar__input-group input-group'>
           <input
             type='text'
-            value={navSearch}
-            onChange={(event) => setNavSearch(event.target.value)}
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
-                // setAdvancedSearch(navSearch)
-                setNavSearch('')
+                setSearch('')
+                dispatch(setNavSearch(search))
                 navigate('/search')
               }
             }}
@@ -54,11 +46,11 @@ const Navbar = () => {
           />
           <div
             className='input-group-text navbar__input-group-text' onClick={() => {
-              // setAdvancedSearch(navSearch)
+              dispatch(setNavSearch(search))
               if (maxQueryMatches) {
-                // setAdvancedSearch('')
+                dispatch(setNavSearch(''))
               }
-              setNavSearch('')
+              setSearch('')
               navigate('/search')
             }}
           ><Search />

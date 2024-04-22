@@ -46,8 +46,10 @@ const Home = () => {
       <ImagesCarousel />
       <h2 className='space-up-lg'>Planea tu siguiente aventura con los mejores precios</h2>
       <OurInfoCard />
-      <h2 className='space-up-lg space-down-lg'>¿Planeando tus vacaciones para alguna fecha?</h2>
-      <h4>Prueba nuestra <Link to='/search' className='link'>búsqueda avanzada</Link>, o bien, ¡contáctanos!</h4>
+      <div className='advanced-search-invitation space-up-lg'>
+        <h2 className='space-down-lg'>¿Planeando tus vacaciones para alguna fecha?</h2>
+        <h4>Prueba nuestra <Link to='/search' className='link'>búsqueda avanzada</Link>, o bien, ¡contáctanos!</h4>
+      </div>
       <WhatsAppButton text='Enviar mensaje' />
       <h2 className='space-up-lg space-down-lg'>Consulta nuestro catálogo</h2>
       <ToursContainerHome />
