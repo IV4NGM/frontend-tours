@@ -1,5 +1,16 @@
+.image-gallery-swipe {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
 .image-gallery-content:not(.fullscreen) .image-gallery-slide {
   width: 75vw;
+  height: 55vh;
+}
+
+.image-gallery-content:not(.fullscreen) .image-gallery-swipe {
   height: 55vh;
 }
 
@@ -13,4 +24,3 @@
   object-fit: contain;
   object-position: center center;
 }
-

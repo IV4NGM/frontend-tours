@@ -74,7 +74,7 @@ const TourCard = ({ tourData }) => {
         {(availability <= 10) && <RectangleTag data={textAvailability} />}
       </div>
       <p className='tour-card-title'>{tourData?.template_info?.name}</p>
-      {minPrice && <p>Desde ${minPrice}</p>}
+      {minPrice && <p className='tour-card-price'>Desde ${minPrice}</p>}
       <p><FaRegCalendarAlt /> {tourData?.template_info?.duration} {tourData?.template_info?.duration === 1 ? 'día' : 'días'}</p>
       <p><IoLocationOutline /> {tourData?.template_info?.states.join(', ')} </p>
       <button className='btn btn-outline-primary'><FaPlus /> Ver detalles y más fechas</button>

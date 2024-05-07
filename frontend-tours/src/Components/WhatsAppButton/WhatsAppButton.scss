@@ -1,7 +1,11 @@
 .btn-contact-us {
   margin-top: 40px;
-  background-color: #ca6b00;
+  background-color: #ffc300;
   border-radius: 25px;
   color: white;
   font-size: 20px;
+  &:hover {
+    transform: scale(1.07);
+    transition: 150ms ease-in-out;
+  }
 }
