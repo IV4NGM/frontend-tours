@@ -1,6 +1,8 @@
+@use "./Styles/colors.scss";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-$red-promos: #ec1b24;
+$red-promos: colors.$red-promos;
+$secondary-color: colors.$secondary-color;
 
 * {
   margin: 0;
