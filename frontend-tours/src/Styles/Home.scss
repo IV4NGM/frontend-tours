@@ -1,4 +1,5 @@
-$secondary-color: rgb(0, 219, 230);
+@use "./colors.scss";
+$secondary-color: colors.$secondary-color;
 
 .link {
   text-decoration: underline;
