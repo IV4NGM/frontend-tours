@@ -16,8 +16,18 @@
   margin-left: 20px;
 }
 
-.products-container {
+.tours-container {
   width: 70%;
+}
+
+.flex-start {
+  align-self: flex-start !important;
+}
+
+.no-tours {
+  align-self: flex-start;
+  margin-top: 20px;
+  font-size: 20px;
 }
 
 

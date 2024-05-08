@@ -10,6 +10,11 @@ import Slider from '@mui/material/Slider'
 import { useNavigate } from 'react-router-dom'
 import AdvancedSearchResults from '@/Components/AdvancedSearchResults/AdvancedSearchResults'
 
+import { DateRangePicker } from 'rsuite'
+import 'rsuite/dist/rsuite.min.css'
+
+const { beforeToday } = DateRangePicker
+
 const AdvancedSearch = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -22,12 +27,16 @@ const AdvancedSearch = () => {
   const [textSearch, setTextSearch] = useState(navSearch)
   const [selectedDuration, setSelectedDuration] = useState('all')
   const [selectedType, setSelectedType] = useState('all')
+  const [isDateRange, setIsDateRange] = useState(false)
+  const [dateRange, setDateRange] = useState([new Date(), new Date()])
   const [sliderValue, setSliderValue] = useState([500, 5000])
   const [tourFilters, setTourFilters] = useState({
     text: '',
     duration: 'all',
     type: 'all',
-    prices: [500, 5000]
+    prices: [500, 5000],
+    isDateRange: false,
+    dateRange: [new Date(), new Date()]
   })
 
   const onSubmit = () => {
@@ -35,8 +44,11 @@ const AdvancedSearch = () => {
       text: textSearch,
       duration: selectedDuration,
       type: selectedType,
-      prices: sliderValue
+      prices: sliderValue,
+      isDateRange,
+      dateRange: dateRange || [new Date(), new Date()]
     })
+    // console.log('submitting')
   }
 
   useEffect(() => {
@@ -61,14 +73,31 @@ const AdvancedSearch = () => {
     window.scrollTo(0, 0)
   }, [])
 
+  const resetFiltersExceptText = () => {
+    setSelectedDuration('all')
+    setSelectedType('all')
+    setIsDateRange(false)
+    setNavSearch('')
+    setSliderValue([500, 5000])
+  }
+
   useEffect(() => {
     setTextSearch(navSearch)
-    onSubmit()
+    setTourFilters({
+      text: navSearch,
+      duration: 'all',
+      type: 'all',
+      prices: [500, 5000],
+      isDateRange: false,
+      dateRange: [new Date(), new Date()]
+    })
+    resetFiltersExceptText()
   }, [navSearch])
 
   const resetFilters = () => {
     setSelectedDuration('all')
     setSelectedType('all')
+    setIsDateRange(false)
     setTextSearch('')
     setNavSearch('')
     setSliderValue([500, 5000])
@@ -153,6 +182,39 @@ const AdvancedSearch = () => {
             <option value='internationals'>Solo Internacionales</option>
           </select>
           <h5 className='spaced'>Fechas</h5>
+          <div className='form-check duration-check'>
+            <label className='form-check-label' htmlFor='isDateRange'>
+              Todas las fechas disponibles
+            </label>
+            <input
+              className='form-check-input' type='radio' name='isDateRange' id='isDateRange'
+              onChange={() => setIsDateRange(false)}
+              checked={!isDateRange}
+            />
+          </div>
+          <div className='form-check duration-check'>
+            <label className='form-check-label' htmlFor='isDateRange-1'>
+              Seleccionar rango de fechas
+            </label>
+            <input
+              className='form-check-input' type='radio' name='isDateRange' id='isDateRange-1'
+              onChange={() => setIsDateRange(true)}
+              checked={isDateRange}
+            />
+          </div>
+          {isDateRange &&
+            <div className='spaced'>
+              <DateRangePicker
+                format='dd/MM/yyyy'
+                character=' – '
+                placeholder='Fecha de inicio - Fecha de fin'
+                shouldDisableDate={beforeToday()}
+                ranges={[]}
+                showHeader={false}
+                value={dateRange}
+                onChange={setDateRange}
+              />
+            </div>}
           <h5 className='spaced'>Filtrar por precio</h5>
           <div className='slider-container'>
             <p>${sliderValue[0]}</p>
@@ -169,10 +231,10 @@ const AdvancedSearch = () => {
           <button className='btn btn-primary space-up-lg' type='submit'>Buscar ahora</button>
           <button onClick={resetFilters} className='btn btn-outline-secondary spaced' type='reset'>Restablecer filtros</button>
         </form>
-        <div className='products-container'>
-          <h3 className='spaced spaced--top'>Tours que coinciden con tu búsqueda</h3>
-          <AdvancedSearchResults filters={tourFilters} />
-        </div>
+        {/* <div className='tours-container'> */}
+        {/* <h3 className='spaced spaced--top'>Tours que coinciden con tu búsqueda</h3> */}
+        <AdvancedSearchResults filters={tourFilters} />
+        {/* </div> */}
       </div>
     </div>
   )

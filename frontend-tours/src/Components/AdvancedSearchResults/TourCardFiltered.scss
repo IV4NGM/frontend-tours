@@ -1,0 +1,26 @@
+.tour-card {
+  margin: 20px;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 0px 5px gray;
+  cursor: pointer;
+  position: relative;
+  background-color: white;
+  &-image-container {
+    position: relative;
+  }
+  &-price {
+    font-size: 18px;
+  }
+  & .main-image {
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+  &-title {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
