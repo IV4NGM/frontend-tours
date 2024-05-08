@@ -78,7 +78,7 @@ const AdvancedSearchResults = ({ filters }) => {
     <div className='tours-container flex-start'>
       {filteredTours.length === 0 &&
         <>
-          <p className='no-tours'>No encontramos tours con estos parámetros, pero aquí hay unos tours que te podrían interesar.</p>
+          <p className='no-tours'>No encontramos tours con estos parámetros, pero aquí hay unos tours que te podrían interesar:</p>
           {sortedTours && sortedTours.map((tour, index) => {
             return <TourCard tourData={tour} key={`tour-card-${index}`} />
           })}
