@@ -127,7 +127,12 @@ h1{
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  min-height: calc(100vh - 250px);
+  min-height: calc(100vh - 246px);
+}
+
+.link {
+  text-decoration: underline;
+  color: darkblue;
 }
 
 button {
@@ -549,14 +554,6 @@ h1{
     padding: 0;
     display: inline-block;
   }
-}
-
-.page-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
-  min-height: calc(100vh - 250px);
 }
 
 .form-control:focus, .form-select:focus {

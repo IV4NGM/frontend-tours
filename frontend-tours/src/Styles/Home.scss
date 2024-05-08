@@ -1,11 +1,6 @@
 @use "./colors.scss";
 $secondary-color: colors.$secondary-color;
 
-.link {
-  text-decoration: underline;
-  color: darkblue;
-}
-
 .advanced-search-invitation {
   background-color: $secondary-color;
   padding: 35px;

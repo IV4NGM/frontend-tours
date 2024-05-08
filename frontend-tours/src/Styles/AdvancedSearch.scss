@@ -10,18 +10,25 @@
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 32%;
   align-items: center;
   height: max-content;
   margin-left: 20px;
 }
 
 .tours-container {
-  width: 70%;
+  width: 65%;
 }
 
 .flex-start {
   align-self: flex-start !important;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
 }
 
 .no-tours {
