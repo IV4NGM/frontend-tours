@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Home from '@/Pages/Home'
 import Login from '@/Pages/Login'
 import TourInfo from '@/Pages/TourInfo'
@@ -10,7 +11,16 @@ import ManageReservations from '@/Pages/ManageReservations'
 import ManagerTools from '@/Pages/ManagerTools'
 import UserInfo from '@/Pages/UserInfo'
 
+const ProtectedRoute = ({ isAllowed, redirectPath = '/', children }) => {
+  if (!isAllowed) {
+    return <Navigate to={redirectPath} replace />
+  }
+
+  return children || <Outlet />
+}
+
 const RouterIndex = () => {
+  const { user } = useSelector((state) => state.auth)
   return (
     <Routes>
       <Route path='/' element={<Home />} />
@@ -19,13 +29,15 @@ const RouterIndex = () => {
       <Route path='/search' element={<AdvancedSearch />} />
       <Route path='/login' element={<Login />} />
 
-      {/* Proteger para users las siguientes rutas: */}
-      <Route path='/tours' element={<ManageTours />} />
-      <Route path='/reservations' element={<ManageReservations />} />
-      <Route path='/me' element={<UserInfo />} />
+      <Route element={<ProtectedRoute isAllowed={!!user} />}>
+        <Route path='/tours' element={<ManageTours />} />
+        <Route path='/reservations' element={<ManageReservations />} />
+        <Route path='/me' element={<UserInfo />} />
+      </Route>
 
-      {/* Proteger para manager las siguientes rutas: */}
-      <Route path='/manager-tools' element={<ManagerTools />} />
+      <Route element={<ProtectedRoute isAllowed={!!user && user?.isAdmin} />}>
+        <Route path='/manager-tools' element={<ManagerTools />} />
+      </Route>
 
       <Route path='/*' element={<PageNotFound />} />
     </Routes>
