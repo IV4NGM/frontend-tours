@@ -99,8 +99,8 @@ const Navbar = () => {
                   </li>
                   <li><hr className='dropdown-divider' /></li>
                   <li className='dropdown-item'><NavLink to='/tours'><GiCommercialAirplane /> Tours</NavLink></li>
-                  <li className='dropdown-item'><NavLink to='/reservations'><IoTicketOutline /> Reservaciones</NavLink></li>
-                  {user?.isManager && <li className='dropdown-item'><NavLink to='/manager-tools'><MdOutlineDashboard /> Herramientas de manager</NavLink></li>}
+                  <li className='dropdown-item'><NavLink to='/reservations'><IoTicketOutline /> Reservaciones y clientes</NavLink></li>
+                  {user?.isAdmin && <li className='dropdown-item'><NavLink to='/manager-tools'><MdOutlineDashboard /> Herramientas de {user?.isManager ? 'manager' : 'admin'}</NavLink></li>}
                   <li><hr className='dropdown-divider' /></li>
                   <li className='dropdown-item'><NavLink to='/me'><SettingsOutlinedIcon /> Configuración de la cuenta</NavLink></li>
                   <li className='dropdown-item'><span className='navbar-brand navbar-brand__logout' onClick={onLogout}><LogoutOutlinedIcon /> Cerrar Sesión</span></li>
