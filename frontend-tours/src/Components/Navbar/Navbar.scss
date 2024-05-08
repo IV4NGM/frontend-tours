@@ -1,7 +1,7 @@
 @use "../../Styles/colors.scss";
 
-$green-success: colors.$green-success;
-$green-success-lighter: colors.$green-success-lighter;
+$success: #0269b7;
+$custom-success-ligther: #38a5f8;
 $secondary-color: colors.$secondary-color;
 
 .navbar {
@@ -11,7 +11,7 @@ $secondary-color: colors.$secondary-color;
   padding-right: 30px !important;
 
   &--is-active {
-    color: $green-success !important;
+    color: $success !important;
   }
 
   &-brand-logo {
@@ -29,6 +29,8 @@ $secondary-color: colors.$secondary-color;
   &-brand__logout {
     font-size: 18px !important;
     color: #dc3545 !important;
+    align-self: center;
+    cursor: pointer;
   }
 
   &__input-group {
@@ -93,7 +95,7 @@ $secondary-color: colors.$secondary-color;
 
   &:active {
     color: white !important;
-    background-color: $green-success-lighter !important;
+    background-color: $custom-success-ligther !important;
   }
 
   &__p {
@@ -181,9 +183,9 @@ $secondary-color: colors.$secondary-color;
 }
 
 .navbar-toggler {
-  color: #198754 !important;
+  color: $success !important;
   &:hover {
-    border-color: #198754 !important
+    border-color: $success !important
   }
 }
 

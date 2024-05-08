@@ -42,12 +42,12 @@ const Home = () => {
 
   return (
     <div className='page-container'>
-      <h2>¡Descubre nuestros destinos más famosos!</h2>
+      <h2>Explorers Tours: Tu siguiente aventura</h2>
       <ImagesCarousel />
       <h2 className='space-up-lg'>Planea tu siguiente aventura con los mejores precios</h2>
       <OurInfoCard />
       <div className='advanced-search-invitation space-up-lg'>
-        <h2 className='space-down-lg'>¿Planeando tus vacaciones para alguna fecha?</h2>
+        <h2 className='space-down-lg'>¿Buscas alguna fecha en especial para tu viaje?</h2>
         <h4>Prueba nuestra <Link to='/search' className='link'>búsqueda avanzada</Link>, o bien, ¡contáctanos!</h4>
       </div>
       <WhatsAppButton text='Enviar mensaje' />

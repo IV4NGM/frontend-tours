@@ -228,8 +228,11 @@ const AdvancedSearch = () => {
             />
             <p>${sliderValue[1] === 5000 ? '5000+' : sliderValue[1]}</p>
           </div>
-          <button className='btn btn-primary space-up-lg' type='submit'>Buscar ahora</button>
-          <button onClick={resetFilters} className='btn btn-outline-secondary spaced' type='reset'>Restablecer filtros</button>
+          <div className='button-row space-up-lg'>
+            <button className='btn btn-primary' type='submit'>Buscar ahora</button>
+            <button onClick={resetFilters} className='btn btn-outline-secondary' type='reset'>Restablecer filtros</button>
+          </div>
+
         </form>
         {/* <div className='tours-container'> */}
         {/* <h3 className='spaced spaced--top'>Tours que coinciden con tu búsqueda</h3> */}
