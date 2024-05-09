@@ -3,6 +3,7 @@ import tourTemplateService from './tourTemplateService'
 
 const initialState = {
   templates: [],
+  templateInfo: {},
   isLoading: false,
   loadingType: '',
   isSuccess: false,
@@ -25,6 +26,15 @@ export const getAllToursTemplates = createAsyncThunk('tourTemplates/get-all', as
 export const getOneTourTemplate = createAsyncThunk('tourTemplates/get-one', async (id, thunkAPI) => {
   try {
     return await tourTemplateService.getOneTemplate(id)
+  } catch (error) {
+    const message = error?.response?.data?.message || error.message || error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+export const getToursFromTemplate = createAsyncThunk('tourTemplates/get-tours-from-template', async (id, thunkAPI) => {
+  try {
+    return await tourTemplateService.getToursFromTemplate(id)
   } catch (error) {
     const message = error?.response?.data?.message || error.message || error.toString()
     return thunkAPI.rejectWithValue(message)
@@ -140,6 +150,21 @@ export const tourTemplateSlice = createSlice({
         state.isError = true
         state.message = action.payload
         state.errorType = 'GET_ONE_TEMPLATE'
+      })
+      .addCase(getToursFromTemplate.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getToursFromTemplate.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.successType = 'GET_TOURS_FROM_TEMPLATE'
+        state.templateInfo.tours = action.payload
+      })
+      .addCase(getToursFromTemplate.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.errorType = 'GET_TOURS_FROM_TEMPLATE'
       })
       .addCase(updateTemplate.pending, (state) => {
         state.isLoading = true

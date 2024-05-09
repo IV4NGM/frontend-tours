@@ -8,8 +8,20 @@ const getAllTours = async (toursFilter) => {
   return response.data
 }
 
+const createTour = async (data, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+  const response = await axios.post(API_URL, data, config)
+
+  return response.data
+}
+
 const tourService = {
-  getAllTours
+  getAllTours,
+  createTour
 }
 
 export default tourService

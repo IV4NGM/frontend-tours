@@ -3,6 +3,7 @@ import authService from './authService'
 
 // Importar las acciones de tourTemplateSlice que pueden causar error de AUTH
 import { createTemplate, updateTemplate, deleteTemplate } from '@/Features/TourTemplates/tourTemplateSlice'
+import { createTour } from '@/Features/Tours/tourSlice'
 
 // Obtenemos del localStorage los datos del usuario
 const user = JSON.parse(localStorage.getItem('user'))
@@ -299,6 +300,9 @@ export const authSlice = createSlice({
         handleError(state, action)
       })
       .addCase(deleteTemplate.rejected, (state, action) => {
+        handleError(state, action)
+      })
+      .addCase(createTour.rejected, (state, action) => {
         handleError(state, action)
       })
       .addCase(setShowTokenModal.fulfilled, (state, action) => {
