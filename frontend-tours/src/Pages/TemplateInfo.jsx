@@ -2,15 +2,17 @@ import '@/Styles/TemplateInfo.scss'
 import { toast } from 'react-toastify'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { getAllToursTemplates, getToursFromTemplate, resetApiState } from '@/Features/TourTemplates/tourTemplateSlice'
+import { getAllToursTemplates, getToursFromTemplate } from '@/Features/TourTemplates/tourTemplateSlice'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '@/Components/Spinner/Spinner'
-import { MdOutlineCancel } from 'react-icons/md'
+import { MdOutlineCancel, MdOutlineEdit } from 'react-icons/md'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import { FaRegCheckCircle } from 'react-icons/fa'
 
 import formatTourDate from '@/Utils/formatTourDate'
+import CustomModal from '@/Components/CustomModal/CustomModal'
+import { cancelTour, completeTour, deleteTour, resetApiState } from '@/Features/Tours/tourSlice'
 
 const TemplateInfo = () => {
   const { id } = useParams()
@@ -18,9 +20,16 @@ const TemplateInfo = () => {
   const dispatch = useDispatch()
 
   const { user } = useSelector(state => state.auth)
-  const { templates, templateInfo, isError, isLoading, isSuccess, message, errorType } = useSelector((state) => state.tourTemplate)
+  const { isError, isSuccess, message, errorType, successType } = useSelector(state => state.tour)
+  const { templates, templateInfo, isLoading } = useSelector((state) => state.tourTemplate)
 
-  const errorTypesAllowed = ['GET_TOURS_FROM_TEMPLATE']
+  const successTypesAllowed = ['COMPLETED_TOUR', 'CANCELED_TOUR', 'DELETED_TOUR']
+  const errorTypesAllowed = ['COMPLETE_TOUR', 'CANCEL_TOUR', 'DELETE_TOUR']
+
+  const [tourToUpdate, setTourToUpdate] = useState('')
+  const [showModalComplete, setShowModalComplete] = useState(false)
+  const [showModalCancel, setShowModalCancel] = useState(false)
+  const [showModalDelete, setShowModalDelete] = useState(false)
 
   useEffect(() => {
     dispatch(getAllToursTemplates())
@@ -35,6 +44,10 @@ const TemplateInfo = () => {
     if (isError && errorTypesAllowed.includes(errorType)) {
       console.log(message)
       toast.error(message)
+    }
+    if (isSuccess && successTypesAllowed.includes(successType)) {
+      toast.success(message)
+      dispatch(resetApiState())
     }
     if (errorType !== 'AUTH') {
       dispatch(resetApiState())
@@ -97,6 +110,10 @@ const TemplateInfo = () => {
       if (!tourA?.isActive && tourB?.isActive) return 1
       if (tourA?.status?.status_code === 'Active' && tourB?.status?.status_code !== 'Active') return -1
       if (tourA?.status?.status_code !== 'Active' && tourB?.status?.status_code === 'Active') return 1
+      if (tourA?.status?.status_code === 'Completed' && tourB?.status?.status_code !== 'Completed') return -1
+      if (tourA?.status?.status_code !== 'Completed' && tourB?.status?.status_code === 'Completed') return 1
+      if (tourA?.status?.status_code === 'Canceled' && tourB?.status?.status_code !== 'Canceled') return -1
+      if (tourA?.status?.status_code !== 'Canceled' && tourB?.status?.status_code === 'Canceled') return 1
       if (tourA?.starting_date !== tourB?.starting_date) {
         return new Date(tourA?.starting_date) - new Date(tourB?.starting_date)
       }
@@ -104,13 +121,29 @@ const TemplateInfo = () => {
     })
   }
 
+  const getClassName = (isActive, statusCode) => {
+    let className = 'template-info-tour-card'
+    if (!isActive) {
+      if (statusCode === 'Completed') {
+        className = className + ' template-info-tour-card-completed'
+      } else if (statusCode === 'Canceled') {
+        className = className + ' template-info-tour-card-canceled'
+      } else {
+        className = className + ' template-info-tour-card-inactive'
+      }
+    }
+    return className
+  }
+
   return (
     <div className='page-container'>
-      <h2 className='bold-text space-down'>{tourData?.name}</h2>
+      <h2 className='bold-text space-down-md'>{tourData?.name}</h2>
+      {((sortedTours && sortedTours.length > 0) && sortedTours.filter(tour => tour?.isActive).length > 0) && <h3>Tours activos</h3>}
       <div className='tour-info-cards-container'>
-        {(sortedTours && sortedTours.length > 0) && sortedTours.map((tour, index) => (
-          <div key={`tour-date-${index}`} className='template-info-tour-card'>
-            <h4>{formatTourDate(tour.starting_date, tourData?.duration)}</h4>
+        {(sortedTours && sortedTours.length > 0) && sortedTours.filter(tour => tour?.isActive).map((tour, index) => (
+          <div key={`tour-date-${index}`} className={getClassName(tour?.isActive, tour?.status?.status_code)}>
+            <h4 className='space-down'>{formatTourDate(tour.starting_date, tourData?.duration)} de {new Date(tour.starting_date).getFullYear()}</h4>
+            <p className='self-center small-text'><strong>Id:</strong> {tour._id}</p>
             <p><strong>Status:</strong> {tour.status.status_code}</p>
             <p><strong>Total de asientos:</strong> {tour.total_seats}</p>
             <p><strong>Precio:</strong> ${tour.price}</p>
@@ -127,14 +160,123 @@ const TemplateInfo = () => {
               </>} */}
 
             <p><strong>isActive:</strong> {tour?.isActive ? 'true' : 'false'}</p>
-            {(user?.isAdmin && tour?.isActive && tour?.status?.status_code !== 'Canceled' && tour?.status?.status_code !== 'Completed') && <button className='btn btn-outline-success space-up self-center'><FaRegCheckCircle /> Marcar como completo</button>}
-            {(user?.isAdmin && tour?.isActive && tour?.status?.status_code !== 'Canceled' && tour?.status?.status_code !== 'Completed') && <button className='btn btn-outline-danger space-up self-center'><MdOutlineCancel /> Cancelar tour</button>}
-            {(user?.isAdmin && tour?.isActive && tour?.status?.status_code === 'Canceled') && <button className='btn btn-outline-secondary space-up self-center'><DeleteOutlineOutlinedIcon /> Eliminar tour</button>}
+            <div className='space-down' />
+            {(user?.isAdmin && tour?.isActive) && <button className='btn btn-outline-secondary space-up self-center'><MdOutlineEdit /> Editar tour</button>}
+            {(user?.isAdmin && tour?.isActive && tour?.status?.status_code !== 'Canceled' && tour?.status?.status_code !== 'Completed') &&
+              <button
+                className='btn btn-outline-success space-up self-center' onClick={() => {
+                  setTourToUpdate(tour._id)
+                  setShowModalComplete(true)
+                }}
+              >
+                <FaRegCheckCircle /> Marcar como completo
+              </button>}
+            {(user?.isAdmin && tour?.isActive && tour?.status?.status_code !== 'Canceled' && tour?.status?.status_code !== 'Completed') &&
+              <button
+                className='btn btn-outline-danger space-up self-center' onClick={() => {
+                  setTourToUpdate(tour._id)
+                  setShowModalCancel(true)
+                }}
+              >
+                <MdOutlineCancel /> Cancelar tour
+              </button>}
+            {(user?.isAdmin && tour?.isActive && tour?.status?.status_code === 'Canceled') &&
+              <button
+                className='btn btn-danger space-up self-center' onClick={() => {
+                  setTourToUpdate(tour._id)
+                  setShowModalDelete(true)
+                }}
+              >
+                <DeleteOutlineOutlinedIcon /> Eliminar tour
+              </button>}
           </div>
         ))}
       </div>
+      {((sortedTours && sortedTours.length > 0) && sortedTours.filter(tour => !tour?.isActive).length > 0) && <h3 className='space-up-lg'>Tours inactivos</h3>}
+      <div className='tour-info-cards-container'>
+        {(sortedTours && sortedTours.length > 0) && sortedTours.filter(tour => !tour?.isActive).map((tour, index) => (
+          <div key={`tour-date-${index}`} className={getClassName(tour?.isActive, tour?.status?.status_code)}>
+            <h4 className='space-down'>{formatTourDate(tour.starting_date, tourData?.duration)} de {new Date(tour.starting_date).getFullYear()}</h4>
+            <p className='self-center small-text'><strong>Id:</strong> {tour._id}</p>
+            <p><strong>Status:</strong> {tour.status.status_code}</p>
+            <p><strong>Total de asientos:</strong> {tour.total_seats}</p>
+            <p><strong>Precio:</strong> ${tour.price}</p>
+            <p><strong>Precio para reservar:</strong> ${tour.min_payment}</p>
+            <p><strong>Total de reservaciones:</strong> {tour.reservations?.length || 0}</p>
+            <p><strong>Asientos reservados:</strong> {tour.reserved_seats_amount}</p>
+            <p><strong>Asientos confirmados:</strong> {tour.confirmed_seats?.length || 0}</p>
+            {/* {(tour.promos && tour.promos?.length > 0) &&
+              <>
+                <h5 className='space-up'>Promos</h5>
+                {tour.promos.map((promo, index) => (
+                  <p key={`promo-tour-${tour.id}-${index}`}>Tipo: {promo.type} Código: {promo.code}</p>
+                ))}
+              </>} */}
 
+            <p><strong>isActive:</strong> {tour?.isActive ? 'true' : 'false'}</p>
+            <div className='space-down' />
+            {(user?.isAdmin && tour?.isActive) && <button className='btn btn-outline-secondary space-up self-center'><MdOutlineEdit /> Editar tour</button>}
+            {(user?.isAdmin && tour?.isActive && tour?.status?.status_code !== 'Canceled' && tour?.status?.status_code !== 'Completed') &&
+              <button
+                className='btn btn-outline-success space-up self-center' onClick={() => {
+                  setTourToUpdate(tour._id)
+                  setShowModalComplete(true)
+                }}
+              >
+                <FaRegCheckCircle /> Marcar como completo
+              </button>}
+            {(user?.isAdmin && tour?.isActive && tour?.status?.status_code !== 'Canceled' && tour?.status?.status_code !== 'Completed') &&
+              <button
+                className='btn btn-outline-danger space-up self-center' onClick={() => {
+                  setTourToUpdate(tour._id)
+                  setShowModalCancel(true)
+                }}
+              >
+                <MdOutlineCancel /> Cancelar tour
+              </button>}
+            {(user?.isAdmin && tour?.isActive && tour?.status?.status_code === 'Canceled') &&
+              <button
+                className='btn btn-danger space-up self-center' onClick={() => {
+                  setTourToUpdate(tour._id)
+                  setShowModalDelete(true)
+                }}
+              >
+                <DeleteOutlineOutlinedIcon /> Eliminar tour
+              </button>}
+          </div>
+        ))}
+      </div>
+      <CustomModal
+        title='Marcar tour como completo'
+        showModal={showModalComplete}
+        setShowModal={setShowModalComplete}
+        text='¿Estás seguro de que quieres marcar este tour como completo? Esta acción no se puede deshacer.'
+        onYes={() => dispatch(completeTour(tourToUpdate))}
+        textYes='Marcar tour como completo'
+        textNo='Cancelar'
+      />
+      <CustomModal
+        title='Cancelar tour'
+        showModal={showModalCancel}
+        setShowModal={setShowModalCancel}
+        text='¿Estás seguro de que quieres cancelar este tour? Esta acción permanente cancelará todas las reservaciones asociadas, y podría generar obligaciones de devoluciones.'
+        onYes={() => dispatch(cancelTour(tourToUpdate))}
+        textYes='Cancelar tour'
+        textNo='Descartar cambios'
+        danger
+      />
+      <CustomModal
+        title='Eliminar tour'
+        showModal={showModalDelete}
+        setShowModal={setShowModalDelete}
+        text='¿Estás seguro de que quieres eliminar este tour? Esta acción no se puede deshacer.'
+        onYes={() => dispatch(deleteTour(tourToUpdate))}
+        textYes='Eliminar tour'
+        textNo='Cancelar'
+        danger
+      />
     </div>
+
   )
 }
 

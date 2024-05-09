@@ -19,13 +19,33 @@
   align-items: flex-start;
   width: 300px;
   & p {
-    margin: 0;
+    margin-bottom: 5px;
   }
   & h4, h5 {
     align-self: center;
+  }
+  &-inactive {
+    background-color: rgba(255, 255, 255, 0.823);
+    color: rgb(112, 112, 112);
+  }
+  &-completed {
+    background-color: rgba(108, 221, 168, 0.755);
+    color: rgb(90, 90, 90);
+    // box-shadow: 0px 0px 6px rgba(61, 164, 116, 1);
+  }
+  &-canceled {
+    background-color: #ff7980be;
+    color: rgb(90, 90, 90);
+  }
+  & button {
+    width: 100%;
   }
 }
 
 .self-center {
   align-self: center;
+}
+
+.small-text {
+  font-size: 14px !important;
 }

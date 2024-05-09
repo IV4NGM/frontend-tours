@@ -19,9 +19,45 @@ const createTour = async (data, token) => {
   return response.data
 }
 
+const completeTour = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+  const response = await axios.get(API_URL + `complete/${id}`, config)
+
+  return response.data
+}
+
+const cancelTour = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+  const response = await axios.get(API_URL + `cancel/${id}`, config)
+
+  return response.data
+}
+
+const deleteTour = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+  const response = await axios.delete(API_URL + id.toString(), config)
+
+  return response.data
+}
+
 const tourService = {
   getAllTours,
-  createTour
+  createTour,
+  completeTour,
+  cancelTour,
+  deleteTour
 }
 
 export default tourService

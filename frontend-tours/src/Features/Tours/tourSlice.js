@@ -31,6 +31,33 @@ export const createTour = createAsyncThunk('tours/create-tour', async (data, thu
   }
 })
 
+export const completeTour = createAsyncThunk('tours/complete-tour', async (id, thunkAPI) => {
+  try {
+    return await tourService.completeTour(id, thunkAPI.getState().auth.user.token)
+  } catch (error) {
+    const message = error?.response?.data?.message || error.message || error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+export const cancelTour = createAsyncThunk('tours/cancel-tour', async (id, thunkAPI) => {
+  try {
+    return await tourService.cancelTour(id, thunkAPI.getState().auth.user.token)
+  } catch (error) {
+    const message = error?.response?.data?.message || error.message || error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+export const deleteTour = createAsyncThunk('tours/delete-tour', async (id, thunkAPI) => {
+  try {
+    return await tourService.deleteTour(id, thunkAPI.getState().auth.user.token)
+  } catch (error) {
+    const message = error?.response?.data?.message || error.message || error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
 const handleError = (state, action) => {
   const sessionExpiredMessages = ['El usuario no se encuentra en la base de datos', 'Acceso no autorizado', 'No se proporcionó un token']
   if (sessionExpiredMessages.includes(action.payload)) {
@@ -97,6 +124,54 @@ export const tourSlice = createSlice({
         state.isError = true
         state.message = action.payload
         state.errorType = 'CREATE_TOUR'
+        handleError(state, action)
+      })
+      .addCase(completeTour.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(completeTour.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.successType = 'COMPLETED_TOUR'
+        state.message = `Reservas actualizadas: ${action.payload.updated_reservations || 0}.\n Devoluciones: ${action.payload.reservations_with_devolutions}`
+      })
+      .addCase(completeTour.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.errorType = 'COMPLETE_TOUR'
+        handleError(state, action)
+      })
+      .addCase(cancelTour.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(cancelTour.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.successType = 'CANCELED_TOUR'
+        state.message = `Reservas actualizadas: ${action.payload.updated_reservations || 0}.\n Devoluciones: ${action.payload.reservations_with_devolutions}`
+      })
+      .addCase(cancelTour.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.errorType = 'CANCEL_TOUR'
+        handleError(state, action)
+      })
+      .addCase(deleteTour.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteTour.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.successType = 'DELETED_TOUR'
+        state.message = 'Tour eliminado exitosamente'
+      })
+      .addCase(deleteTour.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.errorType = 'DELETE_TOUR'
         handleError(state, action)
       })
   }

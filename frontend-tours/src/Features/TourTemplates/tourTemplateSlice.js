@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import tourTemplateService from './tourTemplateService'
 
+import { completeTour, cancelTour, deleteTour } from '@/Features/Tours/tourSlice'
+
 const initialState = {
   templates: [],
   templateInfo: {},
@@ -204,6 +206,51 @@ export const tourTemplateSlice = createSlice({
         state.message = action.payload
         state.errorType = 'DELETE_TEMPLATE'
         handleError(state, action)
+      })
+      .addCase(completeTour.fulfilled, (state, action) => {
+        state.templateInfo.tours = state.templateInfo.tours.map((tour) => {
+          if (tour._id === action.payload._id) {
+            return {
+              ...tour,
+              isActive: false,
+              status: {
+                status_code: 'Completed',
+                description: 'Tour completo'
+              },
+              updated_reservations: action.payload.updated_reservations,
+              reservations_with_devolutions: action.payload.reservations_with_devolutions
+            }
+          }
+          return tour
+        })
+      })
+      .addCase(cancelTour.fulfilled, (state, action) => {
+        state.templateInfo.tours = state.templateInfo.tours.map((tour) => {
+          if (tour._id === action.payload._id) {
+            return {
+              ...tour,
+              isActive: false,
+              status: {
+                status_code: 'Canceled',
+                description: 'Tour cancelado'
+              },
+              updated_reservations: action.payload.updated_reservations,
+              reservations_with_devolutions: action.payload.reservations_with_devolutions
+            }
+          }
+          return tour
+        })
+      })
+      .addCase(deleteTour.fulfilled, (state, action) => {
+        state.templateInfo.tours = state.templateInfo.tours.map((tour) => {
+          if (tour._id === action.payload._id) {
+            return {
+              ...tour,
+              isActive: false
+            }
+          }
+          return tour
+        })
       })
   }
 })

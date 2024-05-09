@@ -457,6 +457,12 @@ ul.navbar-nav{
 
 .space-up {
   margin-top: 10px;
+  &-md-s {
+    margin-top: 20px;
+  }
+  &-md {
+    margin-top: 40px;
+  }
   &-lg {
     margin-top: 80px;
   }
@@ -464,6 +470,9 @@ ul.navbar-nav{
 
 .space-down {
   margin-bottom: 20px;
+  &-md {
+    margin-bottom: 40px;
+  }
   &-lg {
     margin-bottom: 80px;
   }
