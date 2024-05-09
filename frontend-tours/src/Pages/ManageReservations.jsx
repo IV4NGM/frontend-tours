@@ -67,6 +67,7 @@ const ManageReservations = () => {
       </section>
       <section className='manage-section'>
         <h4>Clientes</h4>
+        <button className='btn btn-outline-success space-down' onClick={() => navigate('/new-client')}> <IoMdAdd /> Nuevo cliente</button>
         <button className='btn btn-outline-primary space-down' onClick={() => setShowSearchClientReservation(!showSearchClientReservation)}> {showSearchClientReservation ? 'Ocultar' : 'Ver'} reservaciones de cliente {showSearchClientReservation ? <MdExpandLess /> : <MdExpandMore />}</button>
         {showSearchClientReservation &&
           <form onSubmit={onSubmitClientReservation}>

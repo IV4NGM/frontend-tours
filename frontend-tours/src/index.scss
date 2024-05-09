@@ -821,3 +821,11 @@ textarea::-webkit-scrollbar-thumb:hover{
     min-width: 250px;
   }
 }
+
+.self-center {
+  align-self: center !important;
+}
+
+.self-start {
+  align-self: flex-start !important;
+}
