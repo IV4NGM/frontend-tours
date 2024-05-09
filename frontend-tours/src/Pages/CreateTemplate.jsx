@@ -177,28 +177,30 @@ const CreateTemplate = () => {
             <p className='medium-text'>Estados</p>
             <MultipleFieldsInput name='states' title='estado' placeholder='Nombre del estado' control={control} register={register} />
 
-            <div className='form-check'>
-              <label className='form-check-label' htmlFor='type-national'>
-                Nacional
-              </label>
-              <input
-                className='form-check-input' type='radio' name='isInternational' id='type-national'
-                onChange={() => setIsInternational(false)}
-                checked={!isInternational}
-                value={false}
-              />
-            </div>
+            <div className='international-row'>
+              <div className='form-check'>
+                <label className='form-check-label' htmlFor='type-national'>
+                  Nacional
+                </label>
+                <input
+                  className='form-check-input' type='radio' name='isInternational' id='type-national'
+                  onChange={() => setIsInternational(false)}
+                  checked={!isInternational}
+                  value={false}
+                />
+              </div>
 
-            <div className='form-check'>
-              <label className='form-check-label' htmlFor='type-international'>
-                Internacional
-              </label>
-              <input
-                className='form-check-input' type='radio' name='isInternational' id='type-international'
-                onChange={() => setIsInternational(true)}
-                checked={isInternational}
-                value
-              />
+              <div className='form-check'>
+                <label className='form-check-label' htmlFor='type-international'>
+                  Internacional
+                </label>
+                <input
+                  className='form-check-input' type='radio' name='isInternational' id='type-international'
+                  onChange={() => setIsInternational(true)}
+                  checked={isInternational}
+                  value
+                />
+              </div>
             </div>
 
             {isInternational &&
@@ -210,7 +212,7 @@ const CreateTemplate = () => {
                 <MultipleFieldsInput name='continents' title='continente' placeholder='Nombre del continente' control={control} register={register} />
               </>}
 
-            <button type='submit' className='btn btn-success'>
+            <button type='submit' className='btn btn-success space-up-lg'>
               <AddOutlinedIcon /> Crear plantilla
             </button>
           </form>

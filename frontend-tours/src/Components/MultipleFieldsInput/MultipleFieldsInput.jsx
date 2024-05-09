@@ -17,11 +17,11 @@ const MultipleFieldsInput = ({ name, title, placeholder, control, register, stri
             id={`${name}-field-${index}`}
           />
           <label htmlFor={`${name}-field-${index}`}>{placeholder}</label>
-          {!strict && <button className='btn btn-outline-danger' type='button' onClick={() => remove(index)}>Eliminar {title}</button>}
-          {(strict && index > 0) && <button className='btn btn-outline-danger' type='button' onClick={() => remove(index)}>Eliminar {title}</button>}
+          {!strict && <button className='btn btn-outline-danger space-up space-down' type='button' onClick={() => remove(index)}>Eliminar {title}</button>}
+          {(strict && index > 0) && <button className='btn btn-outline-danger space-up space-down' type='button' onClick={() => remove(index)}>Eliminar {title}</button>}
         </div>
       ))}
-      <button className='btn btn-outline-secondary' type='button' onClick={() => append('')}>Agregar {title}</button>
+      <button className='btn btn-outline-secondary space-up space-down-lg' type='button' onClick={() => append('')}>Agregar {title}</button>
     </>
   )
 }
