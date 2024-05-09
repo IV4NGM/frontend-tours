@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from './authService'
 
-// Importar las acciones de movieSlice que pueden causar error de AUTH
-import { getContextMovies, getOneMovieContext, likeMovie, dislikeMovie, resetLikesMovie, createMovie, updateMovie, deleteMovie } from '@/Features/Movies/movieSlice'
+// Importar las acciones de tourTemplateSlice que pueden causar error de AUTH
+import { createTemplate, updateTemplate, deleteTemplate } from '@/Features/TourTemplates/tourTemplateSlice'
 
 // Obtenemos del localStorage los datos del usuario
 const user = JSON.parse(localStorage.getItem('user'))
@@ -292,28 +292,13 @@ export const authSlice = createSlice({
         state.errorType = 'DELETE_USER'
         handleError(state, action)
       })
-      .addCase(getContextMovies.rejected, (state, action) => {
+      .addCase(createTemplate.rejected, (state, action) => {
         handleError(state, action)
       })
-      .addCase(getOneMovieContext.rejected, (state, action) => {
+      .addCase(updateTemplate.rejected, (state, action) => {
         handleError(state, action)
       })
-      .addCase(likeMovie.rejected, (state, action) => {
-        handleError(state, action)
-      })
-      .addCase(dislikeMovie.rejected, (state, action) => {
-        handleError(state, action)
-      })
-      .addCase(resetLikesMovie.rejected, (state, action) => {
-        handleError(state, action)
-      })
-      .addCase(createMovie.rejected, (state, action) => {
-        handleError(state, action)
-      })
-      .addCase(updateMovie.rejected, (state, action) => {
-        handleError(state, action)
-      })
-      .addCase(deleteMovie.rejected, (state, action) => {
+      .addCase(deleteTemplate.rejected, (state, action) => {
         handleError(state, action)
       })
       .addCase(setShowTokenModal.fulfilled, (state, action) => {

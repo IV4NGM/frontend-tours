@@ -72,7 +72,6 @@ const AdvancedSearchResults = ({ filters }) => {
   })
 
   filteredTours = filteredTours.map(tour => formatTourInfo(tour, filters)).filter(tour => tour.tours.length > 0)
-  console.log(filteredTours)
 
   return (
     <div className='tours-container flex-start'>
