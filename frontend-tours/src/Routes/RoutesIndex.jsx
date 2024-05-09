@@ -15,6 +15,7 @@ import EditTemplate from '@/Pages/EditTemplate'
 import CreateTour from '@/Pages/CreateTour'
 import EditTour from '@/Pages/EditTour'
 import TemplateInfo from '@/Pages/TemplateInfo'
+import CreateReservation from '@/Pages/CreateReservation'
 
 const ProtectedRoute = ({ isAllowed, redirectPath = '/', children }) => {
   if (!isAllowed) {
@@ -40,6 +41,7 @@ const RouterIndex = () => {
         <Route path='/edit-tour/:id' element={<EditTour />} />
         <Route path='/template/:id' element={<TemplateInfo />} />
         <Route path='/reservations' element={<ManageReservations />} />
+        <Route path='/new-reservation' element={<CreateReservation />} />
         <Route path='/me' element={<UserInfo />} />
       </Route>
 
