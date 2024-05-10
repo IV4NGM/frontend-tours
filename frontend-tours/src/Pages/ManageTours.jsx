@@ -52,8 +52,8 @@ const ManageTours = () => {
       {user?.isAdmin &&
         <section className='manage-section'>
           <h4>Plantillas</h4>
-          <button className='btn btn-outline-success' onClick={() => navigate('/new-template')}><IoMdAdd /> Crear plantilla</button>
-          <button className='btn btn-outline-primary' onClick={() => setShowTemplates(!showTemplates)}>{showTemplates ? 'Ocultar' : 'Ver'} plantillas existentes {showTemplates ? <MdExpandLess /> : <MdExpandMore />} </button>
+          <button className='btn btn-outline-success space-down' onClick={() => navigate('/new-template')}><IoMdAdd /> Crear plantilla</button>
+          <button className='btn btn-outline-primary space-up' onClick={() => setShowTemplates(!showTemplates)}>{showTemplates ? 'Ocultar' : 'Ver'} plantillas existentes {showTemplates ? <MdExpandLess /> : <MdExpandMore />} </button>
           {showTemplates &&
             <div className='templates-container'>
               {templates && templates.map((template, index) => {
@@ -69,8 +69,8 @@ const ManageTours = () => {
         </section>}
       <section className='manage-section'>
         <h4>Tours</h4>
-        <button className='btn btn-outline-success' onClick={() => navigate('/new-tour')}><IoMdAdd /> Crear tour</button>
-        <button className='btn btn-outline-primary' onClick={() => setShowTourTemplates(!showTourTemplates)}>{showTourTemplates ? 'Ocultar' : 'Ver'} tours {showTourTemplates ? <MdExpandLess /> : <MdExpandMore />} </button>
+        <button className='btn btn-outline-success space-down' onClick={() => navigate('/new-tour')}><IoMdAdd /> Crear tour</button>
+        <button className='btn btn-outline-primary space-up' onClick={() => setShowTourTemplates(!showTourTemplates)}>{showTourTemplates ? 'Ocultar' : 'Ver'} tours {showTourTemplates ? <MdExpandLess /> : <MdExpandMore />} </button>
         {showTourTemplates &&
           <div className='templates-container'>
             {templates && templates.map((template, index) => {

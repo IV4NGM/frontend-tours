@@ -2,7 +2,7 @@ import '@/Styles/AdvancedSearch.scss'
 import { toast } from 'react-toastify'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { getAllTours, resetApiState, setNavSearch } from '@/Features/Tours/tourSlice'
+import { getAllTours, resetApiState, resetNavSearch, setNavSearch } from '@/Features/Tours/tourSlice'
 import { useEffect, useState } from 'react'
 import useGetCurrentFormattedDate from '@/Hooks/useGetCurrentFormattedDate'
 
@@ -55,6 +55,7 @@ const AdvancedSearch = () => {
     dispatch(getAllTours({ current_date: currentDate }))
 
     return () => {
+      // dispatch(resetNavSearch())
       dispatch(resetApiState())
     }
   }, [])
@@ -100,6 +101,7 @@ const AdvancedSearch = () => {
     setIsDateRange(false)
     setTextSearch('')
     setNavSearch('')
+    dispatch(resetNavSearch())
     setSliderValue([500, 5000])
   }
 
@@ -230,7 +232,7 @@ const AdvancedSearch = () => {
           </div>
           <div className='button-row space-up-lg'>
             <button className='btn btn-primary' type='submit'>Buscar ahora</button>
-            <button onClick={resetFilters} className='btn btn-outline-secondary' type='reset'>Restablecer filtros</button>
+            <button onClick={() => resetFilters()} className='btn btn-outline-secondary' type='reset'>Restablecer filtros</button>
           </div>
 
         </form>
